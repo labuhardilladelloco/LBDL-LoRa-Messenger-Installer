@@ -12,6 +12,21 @@ Abre el sitio con Chrome o Edge de escritorio, conecta el ESP32 por USB, elige e
 
 Los binarios publicados se generaron desde la versión `1.0.0-pre.1+a8ed8db`.
 
+## Aplicación Android
+
+El sitio enlaza la APK release firmada de LBDL LoRa Messenger `1.0.0+1`,
+publicada como asset de la
+[GitHub Release android-v1.0.0](https://github.com/labuhardilladelloco/LBDL-LoRa-Messenger-Installer/releases/tag/android-v1.0.0).
+El APK no se versiona dentro de este repositorio.
+
+- Paquete: `com.labuhardilladelloco.lbdl_messenger`
+- Tamaño: 54.496.705 bytes
+- SHA-256: `85B686685C8B71E5F3EB23A126E8ACF5A6179298ABEACE40DCA10D2A752BC393`
+
+Una instalación debug anterior puede ser incompatible con la firma release.
+Antes de desinstalarla, se debe conservar el historial local que resulte
+necesario.
+
 ## Integridad
 
 - `firmware/node-a-merged.bin`: `DC305918EE9F9B14FCE010E18C83D6D62BC765764E2EDBCC3EAF3EDF7D6FD5C2`
