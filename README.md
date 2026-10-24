@@ -14,14 +14,17 @@ Los binarios publicados se generaron desde la versión `1.0.0-pre.1+a8ed8db`.
 
 ## Aplicación Android
 
-La descarga de la APK `1.0.0+1` está temporalmente suspendida tras detectar un
-fallo de interoperabilidad del historial local en la compilación release. El
-APK no se versiona dentro de este repositorio y no se volverá a habilitar hasta
-superar una prueba de envío en teléfono real.
+La APK release `1.0.0+2` se distribuye como asset de GitHub Releases y no se
+versiona dentro de este repositorio. Se comprobó su actualización e instalación
+en un Samsung SM-S911U1, la conexión al nodo y un envío de texto hasta el otro
+móvil.
+
+Descarga:
+https://github.com/labuhardilladelloco/LBDL-LoRa-Messenger-Installer/releases/download/android-v1.0.0/LBDL-LoRa-Messenger-1.0.0%2B2-release.apk
 
 - Paquete: `com.labuhardilladelloco.lbdl_messenger`
-- Tamaño: 54.496.705 bytes
-- SHA-256: `85B686685C8B71E5F3EB23A126E8ACF5A6179298ABEACE40DCA10D2A752BC393`
+- Tamaño: 54.513.089 bytes
+- SHA-256: `D276EA460A921B52DC8D8769DCD986E7B7F11F087F76896F6C830F3E46FB46CC`
 
 Una instalación debug anterior puede ser incompatible con la firma release.
 Antes de desinstalarla, se debe conservar el historial local que resulte
