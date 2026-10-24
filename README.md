@@ -1,0 +1,22 @@
+# LBDL LoRa Messenger — Instalador web
+
+Vista previa pública del instalador mediante ESP Web Tools para los nodos A y B de LBDL LoRa Messenger.
+
+## Estado
+
+Esta versión es exclusivamente de prueba. El firmware todavía no ha sido validado físicamente con ESP32, LoRa, BLE ni teléfonos reales. Selecciona cuidadosamente el nodo correcto antes de instalar.
+
+## Uso
+
+Abre el sitio con Chrome o Edge de escritorio, conecta el ESP32 por USB, elige el nodo A o B y confirma la selección antes de iniciar la instalación.
+
+Los binarios publicados se generaron desde la versión `1.0.0-pre.1+a8ed8db`.
+
+## Integridad
+
+- `firmware/node-a-merged.bin`: `DC305918EE9F9B14FCE010E18C83D6D62BC765764E2EDBCC3EAF3EDF7D6FD5C2`
+- `firmware/node-b-merged.bin`: `A8215209CA20B90B0C35D72DE2152BBABBB61821F911C6C4D3C129644B886C8F`
+
+## Privacidad y procedencia
+
+Este repositorio contiene únicamente los archivos necesarios para desplegar el instalador. No incluye el código fuente, el historial ni información interna del repositorio privado de desarrollo.

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07111f">
+    <meta name="description" content="Instalador USB de LBDL LoRa Messenger para ESP32 DevKit V1.">
+    <title>LBDL LoRa Messenger — Instalador</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#instalacion">Saltar a instalación</a>
+    <header class="hero">
+      <nav class="nav shell" aria-label="Navegación principal">
+        <a class="brand" href="#inicio" aria-label="LBDL LoRa Messenger, inicio">
+          <span class="brand-mark" aria-hidden="true">LBDL//</span>
+          <span>LoRa Messenger</span>
+        </a>
+        <div class="nav-links">
+          <a href="#instalacion">Instalar</a>
+          <a href="#montaje">Montaje</a>
+          <a href="#ayuda">Ayuda</a>
+        </div>
+      </nav>
+
+      <div id="inicio" class="hero-content shell">
+        <div class="hero-copy">
+          <p class="eyebrow">Mensajería fuera de la red móvil</p>
+          <h1>Tu ESP32, listo para hablar por LoRa.</h1>
+          <p class="lead">
+            LBDL LoRa Messenger conecta dos teléfonos Android mediante Bluetooth,
+            dos ESP32 DevKit V1 y dos radios REYAX RYLR998. Instala aquí el firmware
+            correcto por USB, sin preparar un entorno de programación.
+          </p>
+          <a class="primary-link" href="#instalacion">Preparar mi nodo</a>
+        </div>
+        <div class="signal-card" aria-label="Esquema de comunicación">
+          <div class="signal-row"><span>Teléfono A</span><b>BLE</b><span>Nodo A · 1</span></div>
+          <div class="signal-pulse" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="signal-row reverse"><span>Teléfono B</span><b>BLE</b><span>Nodo B · 2</span></div>
+          <p>Enlace LoRa directo · sin backend · sin cuenta</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="instalacion" class="section shell">
+        <div class="section-heading">
+          <p class="eyebrow">Instalación USB</p>
+          <h2>Elige el nodo antes de conectar</h2>
+          <p>Cada placa tiene una dirección distinta. No instales la misma variante en las dos.</p>
+        </div>
+
+        <div id="browser-status" class="status" role="status" aria-live="polite"></div>
+
+        <fieldset class="node-selector">
+          <legend class="sr-only">Selecciona el firmware del nodo</legend>
+          <label class="node-card">
+            <input type="radio" name="node" value="a" data-manifest="./manifest-node-a.json">
+            <span class="node-letter">A</span>
+            <span class="node-copy">
+              <strong>Nodo A</strong>
+              <small>Dirección LoRa 1 · destinatario 2 · BLE NODO_A</small>
+            </span>
+            <span class="check" aria-hidden="true">✓</span>
+          </label>
+          <label class="node-card">
+            <input type="radio" name="node" value="b" data-manifest="./manifest-node-b.json">
+            <span class="node-letter">B</span>
+            <span class="node-copy">
+              <strong>Nodo B</strong>
+              <small>Dirección LoRa 2 · destinatario 1 · BLE NODO_B</small>
+            </span>
+            <span class="check" aria-hidden="true">✓</span>
+          </label>
+        </fieldset>
+
+        <div class="install-grid">
+          <ol class="steps">
+            <li><span>1</span><div><strong>Desconecta periféricos innecesarios</strong><p>Deja la placa estable y conecta su antena de 868 MHz antes de usar la radio.</p></div></li>
+            <li><span>2</span><div><strong>Usa un cable USB de datos</strong><p>Conecta un solo ESP32 al ordenador y cierra monitores serie o PlatformIO.</p></div></li>
+            <li><span>3</span><div><strong>Confirma la variante</strong><p>Comprueba la letra física de la placa antes de abrir el instalador.</p></div></li>
+          </ol>
+
+          <div class="install-box">
+            <p class="warning"><strong>Atención:</strong> la instalación sobrescribe el firmware del ESP32 seleccionado. No afecta al teléfono ni al otro nodo.</p>
+            <label class="confirm-row">
+              <input id="confirm-node" type="checkbox" disabled>
+              <span id="confirm-label">Primero selecciona Nodo A o Nodo B.</span>
+            </label>
+            <div id="install-action" class="install-action" hidden>
+              <p id="selected-node" class="selected-node"></p>
+              <esp-web-install-button id="install-button">
+                <button class="install-button" slot="activate" type="button">Instalar firmware por USB</button>
+                <span slot="unsupported">Este navegador no ofrece Web Serial.</span>
+                <span slot="not-allowed">Abre esta página mediante HTTPS o localhost.</span>
+              </esp-web-install-button>
+              <p class="privacy-note">El selector de puerto lo abre el navegador. La página no puede afirmar que hay un dispositivo hasta que tú elijas uno.</p>
+            </div>
+          </div>
+        </div>
+        <noscript><p class="status error">Activa JavaScript para seleccionar el manifiesto e iniciar ESP Web Tools.</p></noscript>
+      </section>
+
+      <section id="montaje" class="section section-dark">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Montaje verificado</p>
+            <h2>Cuatro conexiones por nodo</h2>
+            <p>Este es el cableado documentado y probado en el proyecto. TX y RX van cruzados.</p>
+          </div>
+          <div class="wiring-layout">
+            <div class="board-card"><span>ESP32 DevKit V1</span><strong>3V3<br>GND<br>GPIO17 / TX2<br>GPIO16 / RX2</strong></div>
+            <div class="wire-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="board-card radio"><span>REYAX RYLR998</span><strong>VDD<br>GND<br>RXD<br>TXD</strong></div>
+          </div>
+          <div class="safety-grid">
+            <p><strong>3,3 V solamente.</strong> No conectes VDD del RYLR998 a 5 V.</p>
+            <p><strong>Antena primero.</strong> Usa una antena adecuada de 868 MHz antes de transmitir.</p>
+            <p><strong>Masa común.</strong> ESP32 y radio deben compartir GND.</p>
+            <p><strong>Módulo correcto.</strong> Confirma que la serigrafía sea RYLR998, no RYLR498.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="android" class="section shell split-section">
+        <div>
+          <p class="eyebrow">Aplicación Android</p>
+          <h2>La conversación vive en tu teléfono</h2>
+          <p>La aplicación se conecta por BLE al nodo asignado, conserva el historial local y envía texto e imágenes a través del enlace LoRa.</p>
+        </div>
+        <div class="download-card">
+          <span class="badge">Pendiente de validación pública</span>
+          <h3>APK de LBDL LoRa Messenger</h3>
+          <p>La descarga se habilitará en esta ruta cuando exista una APK de publicación firmada y validada.</p>
+          <span class="disabled-button" aria-disabled="true">APK todavía no disponible</span>
+          <code>./downloads/lbdl-lora-messenger.apk</code>
+        </div>
+      </section>
+
+      <section id="ayuda" class="section section-soft">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Ayuda rápida</p>
+            <h2>Si el puerto o la programación fallan</h2>
+          </div>
+          <div class="help-grid">
+            <details><summary>El puerto serie no aparece</summary><p>Prueba otro cable y otro puerto USB. En Windows, comprueba que el controlador del conversor USB de tu placa esté instalado. La lista solo muestra los puertos que el navegador puede ofrecer.</p></details>
+            <details><summary>El cable solo carga</summary><p>Muchos cables alimentan pero no llevan datos. Usa uno con el que ya hayas transferido archivos o programado una placa.</p></details>
+            <details><summary>El puerto está ocupado</summary><p>Cierra PlatformIO, Arduino IDE, monitores serie y cualquier otra pestaña que mantenga abierta la placa. Desconecta y vuelve a conectar el USB.</p></details>
+            <details><summary>He elegido el nodo equivocado</summary><p>No conectes la segunda placa. Vuelve a seleccionar la variante correcta y reinstala. A debe usar dirección 1; B, dirección 2.</p></details>
+            <details><summary>No comienza la programación</summary><p>Mantén pulsado BOOT cuando el instalador intente conectar y suéltalo al comenzar. Algunas placas requieren pulsar brevemente EN/RESET.</p></details>
+            <details><summary>Hay reinicios o errores extraños</summary><p>Revisa 3,3 V, GND, el cruce TX/RX y la calidad del cable. Una alimentación insuficiente puede fallar al transmitir aunque la instalación termine.</p></details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-content">
+        <p><strong>LBDL LoRa Messenger</strong><br><span>Proyecto de LaBuhardillaDelLoco</span></p>
+        <p>Instalador en preparación · No validado aún con instalación física desde cero.</p>
+      </div>
+    </footer>
+  </body>
+</html>
