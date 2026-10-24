@@ -14,10 +14,10 @@ Los binarios publicados se generaron desde la versión `1.0.0-pre.1+a8ed8db`.
 
 ## Aplicación Android
 
-El sitio enlaza la APK release firmada de LBDL LoRa Messenger `1.0.0+1`,
-publicada como asset de la
-[GitHub Release android-v1.0.0](https://github.com/labuhardilladelloco/LBDL-LoRa-Messenger-Installer/releases/tag/android-v1.0.0).
-El APK no se versiona dentro de este repositorio.
+La descarga de la APK `1.0.0+1` está temporalmente suspendida tras detectar un
+fallo de interoperabilidad del historial local en la compilación release. El
+APK no se versiona dentro de este repositorio y no se volverá a habilitar hasta
+superar una prueba de envío en teléfono real.
 
 - Paquete: `com.labuhardilladelloco.lbdl_messenger`
 - Tamaño: 54.496.705 bytes
