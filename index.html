@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#07111f">
-    <meta name="description" content="Instalador USB de LBDL LoRa Messenger para ESP32 DevKit V1.">
+    <meta name="description" content="Guía de montaje, instalación USB y aplicación Android de LBDL LoRa Messenger: dos ESP32 que intercambian mensajes y fotos mediante LoRa.">
     <title>LBDL LoRa Messenger — Instalador</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="./styles.css">
@@ -22,26 +22,28 @@
         <div class="nav-links">
           <a href="#instalacion">Instalar</a>
           <a href="#montaje">Montaje</a>
+          <a href="#primeros-pasos">Primeros pasos</a>
+          <a href="#tecnica">Ficha técnica</a>
           <a href="#ayuda">Ayuda</a>
         </div>
       </nav>
 
       <div id="inicio" class="hero-content shell">
         <div class="hero-copy">
-          <p class="eyebrow">Mensajería fuera de la red móvil</p>
-          <h1>Tu ESP32, listo para hablar por LoRa.</h1>
+          <p class="eyebrow">Proyecto maker · ESP32 + BLE + LoRa</p>
+          <h1>Mensajes y fotos por radio. Sin Internet.</h1>
           <p class="lead">
             LBDL LoRa Messenger conecta dos teléfonos Android mediante Bluetooth,
             dos ESP32 DevKit V1 y dos radios REYAX RYLR998. Instala aquí el firmware
             correcto por USB, sin preparar un entorno de programación.
           </p>
-          <a class="primary-link" href="#instalacion">Preparar mi nodo</a>
+          <div class="hero-actions"><a class="primary-link" href="#montaje">Construir los nodos</a><a class="text-link" href="#instalacion">Ya los tengo: instalar firmware →</a></div>
         </div>
-        <div class="signal-card" aria-label="Esquema de comunicación">
+        <div class="signal-card" aria-label="Esquema simplificado de comunicación">
           <div class="signal-row"><span>Teléfono A</span><b>BLE</b><span>Nodo A · 1</span></div>
           <div class="signal-pulse" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="signal-row reverse"><span>Teléfono B</span><b>BLE</b><span>Nodo B · 2</span></div>
-          <p>Enlace LoRa directo · sin backend · sin cuenta</p>
+          <p><strong>Entre Nodo A y Nodo B: LoRa directo.</strong> Los teléfonos se enlazan por BLE con su propio ESP32. No se necesita Internet durante el intercambio.</p>
         </div>
       </div>
     </header>
@@ -49,7 +51,7 @@
     <main>
       <section id="instalacion" class="section shell">
         <div class="section-heading">
-          <p class="eyebrow">Instalación USB</p>
+          <p class="eyebrow">02 / Instalación USB</p>
           <h2>Elige el nodo antes de conectar</h2>
           <p>Cada placa tiene una dirección distinta. No instales la misma variante en las dos.</p>
         </div>
@@ -108,14 +110,36 @@
       <section id="montaje" class="section section-dark">
         <div class="shell">
           <div class="section-heading">
-            <p class="eyebrow">Montaje verificado</p>
+            <p class="eyebrow">01 / Construcción</p>
             <h2>Cuatro conexiones por nodo</h2>
-            <p>Este es el cableado documentado y probado en el proyecto. TX y RX van cruzados.</p>
+            <p>Dos montajes idénticos: uno tendrá firmware A y el otro firmware B. Comprueba la serigrafía de cada placa antes de conectar.</p>
+          </div>
+          <div class="documentation-block">
+            <h3>Materiales para dos nodos</h3>
+            <table class="parts-table"><thead><tr><th>Cantidad</th><th>Componente</th><th>Observaciones</th></tr></thead><tbody>
+              <tr><td>2</td><td>ESP32 DevKit V1</td><td>Placas compatibles con el firmware publicado</td></tr>
+              <tr><td>2</td><td>REYAX RYLR998</td><td>Módulos de radio LoRa, con antenas apropiadas para 868 MHz</td></tr>
+              <tr><td>2</td><td>Cables USB de datos</td><td>Para flashear y alimentar los ESP32</td></tr>
+              <tr><td>2</td><td>Protoboards o placas perforadas</td><td>Según el montaje elegido</td></tr>
+              <tr><td>Según montaje</td><td>Cables Dupont</td><td>Conexiones eléctricas entre ESP32 y RYLR998</td></tr>
+              <tr><td>2</td><td>Teléfonos Android con BLE</td><td>Uno asociado a cada nodo</td></tr>
+            </tbody></table>
+            <p class="note">Para uso portátil puedes alimentar cada ESP32 desde una batería externa USB adecuada. No conectes el módulo RYLR998 directamente a 5 V.</p>
           </div>
           <div class="wiring-layout">
             <div class="board-card"><span>ESP32 DevKit V1</span><strong>3V3<br>GND<br>GPIO17 / TX2<br>GPIO16 / RX2</strong></div>
             <div class="wire-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             <div class="board-card radio"><span>REYAX RYLR998</span><strong>VDD<br>GND<br>RXD<br>TXD</strong></div>
+          </div>
+          <div class="documentation-block">
+            <h3>Tabla de conexiones — repetir en ambos nodos</h3>
+            <table class="parts-table"><thead><tr><th>ESP32 DevKit V1</th><th>RYLR998</th><th>Función</th></tr></thead><tbody>
+              <tr><td><code>3V3</code></td><td><code>VDD</code></td><td>Alimentación 3,3 V</td></tr>
+              <tr><td><code>GND</code></td><td><code>GND</code></td><td>Masa común</td></tr>
+              <tr><td><code>GPIO17 (TX2)</code></td><td><code>RXD</code></td><td>Datos hacia el módulo</td></tr>
+              <tr><td><code>GPIO16 (RX2)</code></td><td><code>TXD</code></td><td>Datos desde el módulo</td></tr>
+            </tbody></table>
+            <p class="note">Fotografías reales del montaje: pendientes de incorporar. No utilices la ilustración esquemática como referencia de la posición física de los pines.</p>
           </div>
           <div class="safety-grid">
             <p><strong>3,3 V solamente.</strong> No conectes VDD del RYLR998 a 5 V.</p>
@@ -141,10 +165,39 @@
         </div>
       </section>
 
+<section id="primeros-pasos" class="section shell">
+        <div class="section-heading">
+          <p class="eyebrow">03 / Primeros pasos</p>
+          <h2>De la placa al primer mensaje</h2>
+          <p>Cuando termines el montaje y la instalación, sigue este recorrido en ambos teléfonos.</p>
+        </div>
+        <ol class="getting-started">
+          <li><span class="step-index">01</span><div><h3>Prepara cada nodo</h3><p>Comprueba alimentación a 3,3 V, GND, TX/RX cruzados y antena adecuada. Instala firmware <strong>A</strong> en una placa y <strong>B</strong> en la otra, usando el navegador y un cable USB de datos.</p></div></li>
+          <li><span class="step-index">02</span><div><h3>Instala la app Android</h3><p>Descarga la APK release disponible más abajo e instálala en ambos teléfonos. Si Android solicita permiso para instalar aplicaciones desde el navegador, autorízalo únicamente para esta instalación de confianza.</p></div></li>
+          <li><span class="step-index">03</span><div><h3>Conecta cada teléfono por Bluetooth</h3><p>Enciende los ESP32, abre LBDL LoRa Messenger y concede los permisos Bluetooth necesarios. Desde el teléfono A busca y conecta <strong>NODO_A</strong>; desde el B, <strong>NODO_B</strong>.</p></div></li>
+          <li><span class="step-index">04</span><div><h3>Envía un texto y después una foto</h3><p>Empieza con un mensaje breve y verifica que aparece en el otro teléfono. Después prueba con una imagen pequeña. Las fotos se fragmentan para transmitirlas por LoRa: pueden tardar bastante más que los mensajes de texto.</p></div></li>
+        </ol>
+        <p class="note">Esta versión conecta una pareja preconfigurada de nodos A/B. No ofrece descubrimiento automático de redes de múltiples nodos, retransmisión mediante repetidores ni mensajería por Internet.</p>
+      </section>
+      <section id="tecnica" class="section section-dark">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">04 / Referencia</p>
+            <h2>Qué hace y qué no hace</h2>
+            <p>Una descripción sin promesas de alcance ni cifras de velocidad que no se hayan medido.</p>
+          </div>
+          <div class="tech-grid">
+            <div><h3>Arquitectura</h3><p>Teléfono Android ↔ BLE ↔ ESP32 ↔ RYLR998 ↔ LoRa ↔ RYLR998 ↔ ESP32 ↔ BLE ↔ teléfono Android.</p></div>
+            <div><h3>Comunicación</h3><p>Mensajes de texto bidireccionales y transferencia de imágenes fragmentadas, con estados de progreso y mecanismos de confirmación implementados en el firmware.</p></div>
+            <div><h3>Limitaciones</h3><p>El alcance depende de antenas, entorno, obstáculos y ajustes de radio. La transferencia de fotografías es lenta frente a Wi‑Fi o redes móviles. No hay repetidores ni pasarela a Internet en esta versión.</p></div>
+            <div><h3>Uso radioeléctrico responsable</h3><p>Las emisiones deben ajustarse a las condiciones aplicables en tu país. El hecho de que una configuración funcione no demuestra cumplimiento normativo. Comprueba banda, ancho de canal, potencia radiada y restricciones de ocupación antes de transmitir.</p></div>
+          </div>
+        </div>
+      </section>
       <section id="ayuda" class="section section-soft">
         <div class="shell">
           <div class="section-heading">
-            <p class="eyebrow">Ayuda rápida</p>
+            <p class="eyebrow">05 / Ayuda rápida</p>
             <h2>Si el puerto o la programación fallan</h2>
           </div>
           <div class="help-grid">
@@ -154,6 +207,9 @@
             <details><summary>He elegido el nodo equivocado</summary><p>No conectes la segunda placa. Vuelve a seleccionar la variante correcta y reinstala. A debe usar dirección 1; B, dirección 2.</p></details>
             <details><summary>No comienza la programación</summary><p>Mantén pulsado BOOT cuando el instalador intente conectar y suéltalo al comenzar. Algunas placas requieren pulsar brevemente EN/RESET.</p></details>
             <details><summary>Hay reinicios o errores extraños</summary><p>Revisa 3,3 V, GND, el cruce TX/RX y la calidad del cable. Una alimentación insuficiente puede fallar al transmitir aunque la instalación termine.</p></details>
+          <details><summary>La aplicación no encuentra el ESP32 por BLE</summary><p>Comprueba que el nodo esté alimentado y que estés buscando NODO_A o NODO_B según el firmware instalado. Concede los permisos Bluetooth que pida Android, desconecta conexiones anteriores y vuelve a buscar.</p></details>
+            <details><summary>El mensaje no llega al otro teléfono</summary><p>Confirma que cada móvil está conectado a su nodo, que las dos placas tienen firmware distinto A y B, y que ambos módulos tienen antena conectada. Prueba primero a corta distancia. No interpretes una confirmación de radio como una confirmación de lectura.</p></details>
+            <details><summary>Una foto tarda o falla</summary><p>La imagen se divide en fragmentos y se transmite por un enlace de muy poco ancho de banda. Prueba una foto más pequeña, verifica la conexión BLE y observa el progreso en la aplicación.</p></details>
           </div>
         </div>
       </section>
